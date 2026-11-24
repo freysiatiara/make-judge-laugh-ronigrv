@@ -30,12 +30,15 @@ def resolve_output_path():
 
 
 def main():
+    text = LINE + "\n"
+    if not LINE.strip() or "\n" in LINE or not 1 <= len(LINE) <= 200:
+        raise SystemExit("entry line must be non-empty, single-line, 1-200 chars")
     path = resolve_output_path()
     parent = os.path.dirname(path)
     if parent:
         os.makedirs(parent, exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(LINE + "\n")
+        fh.write(text)
     os.chmod(path, 0o644)
 
 
